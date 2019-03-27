@@ -1,7 +1,7 @@
 
 // Package
 ///////////////
-package Village;
+package village;
 
 
 // Imports

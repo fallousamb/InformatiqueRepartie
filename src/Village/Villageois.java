@@ -14,14 +14,11 @@ import jade.core.behaviours.CyclicBehaviour;
 import java.awt.Color;
 import java.awt.Graphics;
 
+public class Villageois extends Agent {
 
-public class Ant extends Agent {
-
-
+ 
 	double x;
 	double y;
-	int xb = 1;
-	int yb = 1;
 	private static World leMonde = APIMonde.getMonde();
 
 
@@ -42,17 +39,7 @@ public class Ant extends Agent {
 
 			addBehaviour( new CyclicBehaviour( this ) {
 				public void action() {
-
-					erase();
-					moveRandomly();
-					//eatIfPossible();
-					draw();
-					/*try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}*/
-
+                                    
 				}
 			} );
 		}
@@ -89,51 +76,25 @@ public class Ant extends Agent {
 		leMonde.paint(g);
 	}
 
-	protected void moveRandomly() {
-		int X = (int)x;
-		int Y = (int)y;
-		if(!eatIfPossible()) {//S'il ne trouve pas de nourriture, il se déplace linéarement
-			if (X == 0 ){
-				xb = 1;
-			}
-			if(X == leMonde.getWidth()) {//La fourmis ne dépasse pas le cadre
-				xb = -1;
-			}
-			x += xb;
+	
 
-			if (Y == 0 ){
-				yb = 1;
-			}
-			if(Y == leMonde.getHeight()) {//La fourmis ne dépasse pas le cadre
-				yb = -1;
-			}
-			y += yb;
-		}
-		else {//La fourlis trouve la nourriture et commence le déplacement aléatoire
-			double dirx = Math.random() ;
-			double diry = Math.random() ;
-			System.out.println("random");
-			if (dirx>0.5) {
-				x=x+(dirx+1);
-			} else x=x-1;
-
-			if (diry>0.5) {
-				y=y+(diry+1);
-			} else y=y-1;
-
-		}
-
-	}
-
-	protected boolean eatIfPossible() {
-
-		if(leMonde.eatFood((int)this.x, (int)this.y)){
-			System.out.println("eat");
-			return true;
-		}
-		return false;
-		
-	}
-
+        
+        
+       protected boolean checkStorage(){
+           
+       }
+       
+       protected void createAgent(){
+           
+       }
+       
+       protected void clearStorage(){
+           
+       }
+       
+       
+       
+       
+            
 
 }

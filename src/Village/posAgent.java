@@ -1,4 +1,4 @@
-package Village;
+package village;
 
 
 import jade.core.AID;
