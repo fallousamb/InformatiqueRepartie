@@ -117,7 +117,7 @@ extends Agent
 		((HostUIFrame) m_frame).lbl_rumourAvg.setText( "0.0" );
 
 
-		System.out.println("Creating "+nGuests + "Village");
+		System.out.println("Creating "+nGuests + "village");
 
 		// notice the start time
 		m_startTime = System.currentTimeMillis();
