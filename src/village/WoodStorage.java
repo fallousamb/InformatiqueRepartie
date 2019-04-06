@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package village;
+package ants;
 
 /**
  *
@@ -17,6 +17,17 @@ public class WoodStorage {
     int w;
     
     int woodQuantity;
+
+    public WoodStorage(int x, int y, int h, int w) {
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.w = w;
+    }
+
+   
+
+
 
     public int getX() {
         return x;

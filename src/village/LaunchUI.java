@@ -1,5 +1,5 @@
 
-package village;
+package ants;
 
 
 
@@ -7,11 +7,22 @@ package village;
 ///////////////
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.ProfileImpl;
+import jade.core.Profile;
 
 import jade.wrapper.PlatformController;
 import jade.wrapper.AgentController;
 
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
+
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.OneShotBehaviour;
+
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
 
 import javax.swing.*;
 import java.util.*;
@@ -35,7 +46,12 @@ extends Agent
 	protected JFrame m_frame = null;
 	protected Vector m_guestList = new Vector();    // invitees
 	protected int m_guestCount = 0;                 // arrivals
-
+        
+        protected Vector m_hunterList = new Vector();    // invitees
+	protected int m_hunterCount = 0;                 // arrivals
+        
+        protected Vector m_woodCuterList = new Vector();    // invitees
+	protected int m_woodCuterCount = 0;                 // arrivals
 
 	protected boolean m_partyOver = false;
 	protected NumberFormat m_avgFormat = NumberFormat.getInstance();
@@ -117,7 +133,7 @@ extends Agent
 		((HostUIFrame) m_frame).lbl_rumourAvg.setText( "0.0" );
 
 
-		System.out.println("Creating "+nGuests + "village");
+		System.out.println("Creating "+nGuests +" ants");
 
 		// notice the start time
 		m_startTime = System.currentTimeMillis();
@@ -144,9 +160,82 @@ extends Agent
 		}
 	}
 
+        protected void createHunter( int nGuests ) {
+		// remove any old state
+		m_hunterList.clear();
+		m_hunterCount = 0;
+
+		m_partyOver = false;
+		((HostUIFrame) m_frame).lbl_numIntroductions.setText( "0" );
+		((HostUIFrame) m_frame).prog_rumourCount.setValue( 0 );
+		((HostUIFrame) m_frame).lbl_rumourAvg.setText( "0.0" );
 
 
+		System.out.println("Creating "+nGuests +" hunters");
 
+		// notice the start time
+		m_startTime = System.currentTimeMillis();
+
+
+		PlatformController container = getContainerController(); // get a container controller for creating new agents
+		// create N guest agents
+		try {
+			for (int i = 0;  i < nGuests;  i++) {
+				// create a new agent
+				String localName = "hunter_"+i;
+				AgentController hunter = container.createNewAgent(localName, "ants.Hunter", null);
+				hunter.start();
+				//Agent guest = new GuestAgent();
+				//guest.doStart( "guest_" + i );
+
+				// keep the guest's ID on a local list
+				m_hunterList.add( new AID(localName, AID.ISLOCALNAME) );
+			}
+		}
+		catch (Exception e) {
+			System.err.println( "Exception while adding hunters: " + e );
+			e.printStackTrace();
+		}
+	}
+
+
+        protected void createWoodCuter( int nGuests ) {
+		// remove any old state
+		m_woodCuterList.clear();
+		m_woodCuterCount = 0;
+
+		m_partyOver = false;
+		((HostUIFrame) m_frame).lbl_numIntroductions.setText( "0" );
+		((HostUIFrame) m_frame).prog_rumourCount.setValue( 0 );
+		((HostUIFrame) m_frame).lbl_rumourAvg.setText( "0.0" );
+
+
+		System.out.println("Creating "+nGuests +" WoodCuter");
+
+		// notice the start time
+		m_startTime = System.currentTimeMillis();
+
+
+		PlatformController container = getContainerController(); // get a container controller for creating new agents
+		// create N guest agents
+		try {
+			for (int i = 0;  i < nGuests;  i++) {
+				// create a new agent
+				String localName = "woodCuter_"+i;
+				AgentController guest = container.createNewAgent(localName, "ants.WoodCuter", null);
+				guest.start();
+				//Agent guest = new GuestAgent();
+				//guest.doStart( "guest_" + i );
+
+				// keep the guest's ID on a local list
+				m_woodCuterList.add( new AID(localName, AID.ISLOCALNAME) );
+			}
+		}
+		catch (Exception e) {
+			System.err.println( "Exception while adding WoodCuter: " + e );
+			e.printStackTrace();
+		}
+	}
 
 
 

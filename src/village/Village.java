@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package village;
+package ants;
+
+import java.awt.Point;
 
 /**
  *
@@ -18,6 +20,44 @@ public class Village {
     
     FoodStorage foodStorage;
     WoodStorage woodStorage;
+    
+    Point exitVillage;
+    
+    public Village(int x, int y, int w, int h) {
+        this.h = h;
+        this.w = w;
+        this.x = x;
+        this.y = y;
+        
+        exitVillage= new Point(x+w,y/2);
+        
+        foodStorage = new FoodStorage(x+15,y+15,200,200);
+        woodStorage= new WoodStorage(x+230,y+15,200,200);
+    }
+
+    public int getH() {
+        return h;
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public FoodStorage getFoodStorage() {
+        return foodStorage;
+    }
+
+    public WoodStorage getWoodStorage() {
+        return woodStorage;
+    }
     
     
     
