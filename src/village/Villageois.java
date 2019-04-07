@@ -81,15 +81,27 @@ public class Villageois extends Agent {
         
         
        protected boolean checkStorage(){
+		int foodQuantity = leMonde.getVillage().getFoodStorage().foodQuantity;
+		int woodQunatity = leMonde.getVillage().getWoodStorage().woodQuantity;
+		if(foodQuantity == 50 && woodQunatity == 50) {
+			return true;
+		} else {
+			return false;
+		}
            
        }
        
        protected void createAgent(){
+		if(checkStorage()) {
+			Villageois villageois = new Villageois();
+		}
            
        }
        
        protected void clearStorage(){
-           
+		   leMonde.getVillage().getFoodStorage().foodQuantity = 0;
+		   leMonde.getVillage().getWoodStorage().woodQuantity = 0;
+
        }
        
        

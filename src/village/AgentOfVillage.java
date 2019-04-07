@@ -32,8 +32,8 @@ public class AgentOfVillage extends Agent {
         leMonde.paint(g);
     }
     protected void moveRandomly() {
-        int X = (int) x;
-        int Y = (int) y;
+        int x2 = (int)x + leMonde.getVillage().getW();
+        int y2 = (int)y + leMonde.getVillage().getH();
         double dirx = Math.random();
         double diry = Math.random();
         if (dirx > 0.5) {
@@ -44,6 +44,23 @@ public class AgentOfVillage extends Agent {
         if (diry > 0.5) {
             y = y + (diry + 1);
         } else y = y - 1;
+
+        //Permettre à l'agent de déplacer aléatoirement en dehors du village
+        if((int)x == x2 && (int)y == y2){
+            this.x++;
+            this.y++;
+        }
+
+        //
+        if ((int)x == leMonde.getWidth()) {
+            x--;
+        }
+        if ((int)y == leMonde.getHeight()) {
+            y--;
+        }
+
+
+
 
     }
 
@@ -113,7 +130,7 @@ public class AgentOfVillage extends Agent {
      */
     private void mooveLinearly(Point target) {
         Point hunterPosition = new Point((int)x, (int)y);
-        while (!hunterPosition.equals((Point)hunterPosition)) {
+        while (!hunterPosition.equals(target)) {
             hunterPosition.x = (hunterPosition.x < target.x)?hunterPosition.x++:hunterPosition.x--;
             hunterPosition.y = (hunterPosition.y < target.y)?hunterPosition.y++:hunterPosition.y--;
         }

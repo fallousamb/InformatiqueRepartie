@@ -64,9 +64,10 @@ public class Chasseur extends AgentOfVillage {
      */
     protected void storeFood() {
         //On incrémente la quantité de nourriture
-        leMonde.village.foodStorage.foodQuantity++;
+        leMonde.village.getFoodStorage().foodQuantity++;
 
     }
+
 
 
 }

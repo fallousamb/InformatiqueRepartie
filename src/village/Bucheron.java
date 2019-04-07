@@ -61,10 +61,11 @@ public class Bucheron extends AgentOfVillage {
 
     protected void searchWood() {
 
+
     }
 
     protected void storeWood() {
-        leMonde.getVillage().woodStorage.woodQuantity++;
+        leMonde.getVillage().getWoodStorage().woodQuantity++;
 
     }
 
